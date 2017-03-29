@@ -2,22 +2,24 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
- } from 'react-router-dom'
+  Link,
+} from 'react-router-dom'
 
-const Home = (props) => {
-  /* to checkout what's inside props which got passed in when the route calls the component */
-  console.log(props)
-  return (<h1>Home</h1>)
-}
+const Links = () => (
+  <nav>
+    <Link to='/'>Home</Link>
+    <Link to={{pathname: '/about'}}>About</Link>
+    <Link replace to='/contact'>Contact</Link>
+  </nav>
+)
 
 const App = () => (
   <Router>
     <div>
-      <Route exact path='/' component={Home} />
+      <Links />
+      <Route exact path='/' render={() => <h1>Home</h1>} />
       <Route path='/about' render={() => <h1>About</h1>} />
-      <Route
-        path='/contact'
-        children={({match}) => match && <h1>Contact</h1>} />
+      <Route path='/contact' render={() => <h1>Contact</h1>} />
     </div>
   </Router>
 )
