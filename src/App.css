@@ -1,0 +1,12 @@
+a {
+  margin: 5px;
+}
+
+a, a:visited {
+  color: blue;
+}
+
+/* this active class for a will automatically set to NavLink in App.js.. I also don't know why or how */
+a.active {
+  color: red;
+}
