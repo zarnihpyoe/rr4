@@ -7,27 +7,26 @@ import {
 
 import './App.css'
 
-const isActiveFunc = (match, location) => {
-  console.log(match, location)
-  /* now contact link is never highlighted */
-  return false
-}
-
-const Links = () => (
-  <nav>
-    <NavLink exact to='/'>Home</NavLink>
-    <NavLink activeStyle={ {color: 'green'} } to={{pathname: '/about'}}>About</NavLink>
-    <NavLink isActive={isActiveFunc} activeClassName='active' to='/contact'>Contact</NavLink>
-  </nav>
-)
-
 const App = () => (
   <Router>
     <div>
-      <Links />
-      <Route exact path='/' render={() => <h1>Home</h1>} />
-      <Route path='/about' render={() => <h1>About</h1>} />
-      <Route path='/contact' render={() => <h1>Contact</h1>} />
+      <Route path='/:page?/:subpage?' render={({match}) => (
+          /* in path : means parameter, ? means optional */
+          <h1>
+            PAGE: {match.params.page || 'home'}
+            <br />
+            SUBPAGE: {match.params.subpage}
+          </h1>
+        )} />
+
+      <Route path='/:page?-:subpage?' render={({match}) => (
+          /* in path - can be used instead of / for flexibility */
+          <h1>
+            PAGE: {match.params.page || 'home'}
+            <br />
+            SUBPAGE: {match.params.subpage}
+          </h1>
+        )} />
     </div>
   </Router>
 )
