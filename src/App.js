@@ -23,8 +23,9 @@ const App = () => (
       <Switch>
         <Route exact path='/' render={() => <h1>Home</h1>} />
         <Route path='/about' render={() => <h1>About</h1>} />
-        {/** if we use Route without specifying path, it's gonna match to any path **/}
-        <Route render={() => <h1>Page not Found</h1>} />
+        <Route path='/contact' render={() => <h1>Contact</h1>} />
+        <Route path='/:itemId' render={({match}) =>
+            <h1>Item: {match.params.itemId}</h1>} />
       </Switch>
     </div>
   </Router>
