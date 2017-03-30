@@ -2,20 +2,30 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
-  NavLink,
+  Link,
 } from 'react-router-dom'
 
 import './App.css'
 
+const Links = () => (
+  <nav>
+    <Link to='/?id=123'>Inline</Link>
+    <Link to={ {pathname: '/', search: 'id=456'} }>Object</Link>
+  </nav>
+)
+
 const App = () => (
   <Router>
     <div>
-      <Route path='/:a(\d{2}-\d{2}-\d{4}):b(\.[a-z]+)' render={({match}) => (
-          /* in path : means parameter, ? means optional */
-          <h1>
-            paramA: {match.params.a || 'home'}<br />
-            paramB: {match.params.b}
-          </h1>
+      <Links />
+      <Route path='/' render={({match, location}) => (
+          <div>
+            <p>root</p>
+            <p>{JSON.stringify(match)}</p>
+            <p>{JSON.stringify(location)}</p>
+            {/** becareful URLSearchParams : only works for chrome for now, will become a standard later **/}
+            <p>{new URLSearchParams(location.search).get('id')}</p>
+          </div>
         )} />
     </div>
   </Router>
