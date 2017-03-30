@@ -3,14 +3,16 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
+  Switch,
 } from 'react-router-dom'
 
 import './App.css'
 
 const Links = () => (
   <nav>
-    <Link to='/?id=123'>Inline</Link>
-    <Link to={ {pathname: '/', search: 'id=456'} }>Object</Link>
+    <Link to='/'>Home</Link>
+    <Link to='/about'>About</Link>
+    <Link to='/contact'>Contact</Link>
   </nav>
 )
 
@@ -18,15 +20,12 @@ const App = () => (
   <Router>
     <div>
       <Links />
-      <Route path='/' render={({match, location}) => (
-          <div>
-            <p>root</p>
-            <p>{JSON.stringify(match)}</p>
-            <p>{JSON.stringify(location)}</p>
-            {/** becareful URLSearchParams : only works for chrome for now, will become a standard later **/}
-            <p>{new URLSearchParams(location.search).get('id')}</p>
-          </div>
-        )} />
+      <Switch>
+        <Route exact path='/' render={() => <h1>Home</h1>} />
+        <Route path='/about' render={() => <h1>About</h1>} />
+        {/** if we use Route without specifying path, it's gonna match to any path **/}
+        <Route render={() => <h1>Page not Found</h1>} />
+      </Switch>
     </div>
   </Router>
 )
