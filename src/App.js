@@ -10,21 +10,11 @@ import './App.css'
 const App = () => (
   <Router>
     <div>
-      <Route path='/:page?/:subpage?' render={({match}) => (
+      <Route path='/:a(\d{2}-\d{2}-\d{4}):b(\.[a-z]+)' render={({match}) => (
           /* in path : means parameter, ? means optional */
           <h1>
-            PAGE: {match.params.page || 'home'}
-            <br />
-            SUBPAGE: {match.params.subpage}
-          </h1>
-        )} />
-
-      <Route path='/:page?-:subpage?' render={({match}) => (
-          /* in path - can be used instead of / for flexibility */
-          <h1>
-            PAGE: {match.params.page || 'home'}
-            <br />
-            SUBPAGE: {match.params.subpage}
+            paramA: {match.params.a || 'home'}<br />
+            paramB: {match.params.b}
           </h1>
         )} />
     </div>
